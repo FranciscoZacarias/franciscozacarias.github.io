@@ -1,0 +1,20 @@
+body
+{
+  margin: 2rem auto;              /* Vertical margin: 2rem, Horizontal: auto (centers block) */
+  max-width: 700px;               /* Limits content width */
+  padding: 0 1rem;                /* Horizontal padding */
+  background: #000;             /* Black background */
+  color: rgb(224, 135, 0);      /* Bright orange text color */
+  font: 16px/1.4 monospace;       /* 16px monospace font, line-height 1.4 */
+}
+
+h1, h2
+{
+  font-weight: normal;           /* Removes bold from headers */
+}
+
+hr
+{
+  border: 1px solid rgb(224, 135, 0);  /* Orange horizontal line */
+  opacity: 0.3;                          /* Makes it semi-transparent */
+}
