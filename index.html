@@ -4,264 +4,863 @@
 <head>
   <meta charset="UTF-8">
   <title>Francisco Zacarias</title>
-  <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
+  <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>
 </head>
 
 <header>
   <nav>
-    <a href="#home"     data-page="home"     class="nav-link active">Home</a>
+    <a href="#home" data-page="home" class="nav-link active">Home</a>
     <a href="#projects" data-page="projects" class="nav-link">Projects</a>
-    <a href="#cv"       data-page="cv"       class="nav-link">CV</a>
-    <a href="#blog"     data-page="blog"     class="nav-link">Blog</a>
+    <a href="#cv" data-page="cv" class="nav-link">CV</a>
+    <a href="#blog" data-page="blog" class="nav-link">Blog</a>
   </nav>
 </header>
 
 <body>
   <main id="content">
     <section id="home" class="page">
-      <h1>Home</h1>
-      <p>Home page.</p>
-      <p>Welcome to my blog. This is written in Markdown converted to HTML.</p>
+      <h1>Welcome</h1>
+      <p>
+        Hello! I'm Francisco. I'm a programmer passionate about low-level, engines, tools and games.
+        I mainly enjoy working in C and developing systems from scratch.
+        I work as a tools programmer in the videogame industry.
+      </p>
 
+      <h2>Featured Projects</h2>
+      <a href="#projects" data-page="projects" class="nav-link">Check projects page</a>
       <ul>
-        <li><a href="#point1">Point 1</a></li>
-        <li><a href="#point2">Point 2</a></li>
+        <li>
+          <strong>OpenGL and C Project</strong>: 3D world with interactive cubes, selection, translation, and color changes.
+          <a href="https://github.com/FranciscoZacarias/noname" target="_blank">View on GitHub</a>.
+        </li>
+        <li>
+          <strong>Algorithm Visualizer</strong>: Interactive tool to visualize pathfinding and maze algorithms.
+          <a href="https://github.com/FranciscoZacarias/Algorithm-Visualizer-JavaFX" target="_blank">View on GitHub</a>.
+        </li>
       </ul>
 
-      <h2 id="point1">Point 1</h2>
-      <p>Details about Point 1 go here.</p>
+      <h2>Blog Topics</h2>
+      <a href="#blog" data-page="blog" class="nav-link">Check my blog</a>
+      <ul>
+        <li>
+          <strong>Hephaestus - A table driven code generator</strong>: My code generation tool.
+          <a href="https://github.com/FranciscoZacarias/hephaestus" target="_blank">View on GitHub</a>.
+        </li>
+        <li>
+          <strong>Developing my C codebase</strong>: A short look at the C code base that I have been developing by myself.
+          <a href="https://github.com/FranciscoZacarias/fz_std" target="_blank">View on GitHub</a>.
+        </li>
+      </ul>
 
-      <h2 id="point2">Point 2</h2>
-      <p>Details about Point 2 go here.</p>
+      <hr>
+
+      <a href="#cv" data-page="cv" class="nav-link">Also, check my CV ;)</a>
     </section>
 
     <section id="projects" class="page" style="display:none;">
       <h1>Projects</h1>
-        <p>Some of my personal projects developed independently:</p>
-        <ul>
-          <li><strong>Opengl and C Project                            </strong>: <p>My first opengl project that also tests my first iteration of my codebase. It presents a 3D world with a small amount cubes that can be created, deleted, selected, translated and change color. <a href="#">Learn more</a>.</p></li>
-          <li><strong>C Codebase                                      </strong>: <p>My C codebase for my projects. <a href="#">Learn more</a>.</p></li>
-          <li><strong>My code generator                               </strong>: <p>A flexible way of generating code - or any type of structured text. <a href="#">Learn more</a>.</p></li>
-          <li><strong>Immediate mode UI in C                          </strong>: <p>How I developed my own immediate mode graphical user interface in C. <a href="#">Learn more</a>.</p></li>
-          <li><strong>C and Opengl 3D prototyping renderer template   </strong>: <p>My Opengl and C 3D renderer (that uses instancing and batching) that I use as a template for graphical projects. It draws basic 3D primitives with colors and/or textures and supports text rendering. Good for just prototyping. <a href="#">Learn more</a>.</p></li>
-          <li><strong>Odin simple parser for waveformat (.obj) meshes </strong>: <p>A simple and limited parser for waveformat (.obj) mesh format to learn the Odin language. <a href="#">Learn more</a>.</p></li>
-          <li><strong>Algorithm visualizer in Java                    </strong>: <p>JavaFX project to visualize pathfinding and maze generation algorithms <a href="#">Learn more</a>.</p></li>
-        </ul>
+      <p>Some of my personal projects developed independently:</p>
+      <hr>
+      <ul>
+        <li>
+          <strong>Immediate mode UI in C</strong>:
+          <p>How I developed my own immediate mode graphical user interface in C. </p>
+        </li>
+        <hr>
+        <li>
+          <strong>OpenGL and C Project</strong>:
+          <a href="https://github.com/FranciscoZacarias/noname">github</a>
+          <a href="https://www.youtube.com/watch?v=EnGcnkr7cwQ">video showcase</a>
+          <p>
+            My first OpenGL project that also tests my first iteration of my codebase.
+            It presents a 3D world with a small number of cubes that can be created,
+            deleted, selected, translated, and change color.
+          </p>
+          <img src="assets/project_showcase/opengl_c_project.gif" alt="OpenGL demo" class="cv-gif">
+        </li>
+        <hr>
+        <li>
+          <strong>C Codebase</strong>:
+          <a href="https://github.com/FranciscoZacarias/fz_std">github</a>.
+          <p>My handwritten and everchanging <code>C</code> codebase that I use in every C project. In many aspects a more sane foundation than the CLib to work on. </p>
+          <p>Find more in my <a href="#blog" data-page="blog" class="nav-link">blog</a>.</p>
+          <p>Example opengl project using this codebase: </p>
+          <pre><code>#include "fz_base.h"
+
+function void
+input_update()
+{
+  if (input_is_key_pressed(Keyboard_Key_ESCAPE))
+  {
+    os_exit_process(0);
+  }
+}
+
+function void
+entry_point(Command_Line* command_line)
+{
+  Arena* arena = arena_alloc();
+
+  os_console_init();
+  os_window_init(400, 400, S("fz_std_tests"));
+  os_opengl_init();
+  os_window_open();
+
+  f32 phase = 0.0f;
+  const f32 speed = 0.05f;
+  const f32 tau = PI*2;
+
+  os_window_enable_vsync(true);
+  while(os_is_application_running())
+  {
+    input_update();
+
+    phase += speed;
+    if (phase > tau) phase -= tau;
+    f32 t = (1.0f + cosf(phase)) * 0.5f;
+    f32 r = (1.0f + cosf(phase)) * 0.5f;
+    f32 g = (1.0f + cosf(phase - tau/3)) * 0.5f;
+    f32 b = (1.0f + cosf(phase - 2*tau/3)) * 0.5f;
+    glClearColor(r, g, b, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+    os_swap_buffers();
+  }
+}</code></pre>
+        </li>
+        <hr>
+        <li>
+          <strong>My code generator - Hephaestus</strong>:
+          <a href="https://github.com/FranciscoZacarias/hephaestus">github</a>.
+          <p>A table driven code generation tool capable of generating any type of structured text. </p>
+          <p>Find more in my <a href="#blog" data-page="blog" class="nav-link">blog</a>.</p>
+          <pre><code>@table // Defines stacks for different types
+Stack_Table (name type default_value max)
+{
+  { node              UI_Node*             (UI_Node){0}                   32 }
+  { top_left          Vec2f32              `vec2f32(0.0f, 0.0f)`          32 }
+  { size_x            f32                   g_os_window.dimensions.x      32 }
+}
+
+@generate
+{
+  `// @Hephaestus generated code $(@time_now) \n\n`
+  @foreach(Stack_Table) `// Row $(@index)\ntypedef struct $(name) $(name);\nstruct $(name)_stack\n{\n  $(type) data[$(max)];\n  u32 top_index;\n  $(type) bottom_val;\n};\n\n\n`
+}</code></pre>
+          <p>Generates:</p>
+          <pre><code>// @Hephaestus generated code 2025-October-08 15:53:23 
+
+// Row 0
+typedef struct node node;
+struct node_stack
+{
+  UI_Node* data[32];
+  u32 top_index;
+  UI_Node* bottom_val;
+};
+
+// Row 1
+typedef struct top_left top_left;
+struct top_left_stack
+{
+  Vec2f32 data[32];
+  u32 top_index;
+  Vec2f32 bottom_val;
+};
+
+// Row 2
+typedef struct size_x size_x;
+struct size_x_stack
+{
+  f32 data[32];
+  u32 top_index;
+  f32 bottom_val;
+};</code></pre>
+        </li>
+        <hr>
+        <li>
+          <strong>C and Opengl 3D prototyping renderer template</strong>:
+          <a href="https://github.com/FranciscoZacarias/fz_render_3d">github</a>.
+          <p>My Opengl and C 3D renderer (that uses instancing and batching) that I use as a template for graphical projects. It draws basic 3D primitives with colors and/or textures and supports text rendering. Good for just prototyping. </p>
+          <p>Example project:</p>
+          <pre><code>function void
+entry_point(Command_Line* command_line)
+{
+  Arena* arena = arena_alloc();
+
+  os_console_init();
+  os_window_init(400, 400, PROJECT_NAME, &input);
+  os_opengl_init();
+  os_window_open();
+
+  String8 project_path = os_executable_path(arena);
+  project_path = os_directory_pop(project_path); // Pop *.exe
+  project_path = os_directory_pop(project_path); // Pop from build/
+
+  // Renderer
+  r_init();
+
+  // Camera
+  camera3d_init(&g_camera, 8.0f);
+  g_camera.position = vec3f32(-1.0f, 1.0f, 5.0f);
+  camera3d_look_at(&g_camera, vec3f32(0.0f, 0.0f, 0.0f));
+
+  // Time
+  g_frame_timer = os_timer_start();
+
+  // Frame arena
+  Arena* frame_arena = arena_alloc();
+  u64 frame_arena_initial_position = frame_arena->position;
+
+  g_tex_black = r_load_texture(string8_concat(arena, project_path, S("\\assets\\textures\\prototype\\black.png")));
+  g_tex_red   = r_load_texture(string8_concat(arena, project_path, S("\\assets\\textures\\prototype\\red.png")));
+  g_tex_color_blue = r_create_color_texture(COLOR_BLUE(1.0f));
+  g_tex_color_yellow = r_create_color_texture(COLOR_YELLOW(1.0f));
+
+  while(os_is_application_running(&input))
+  {
+    // Begin frame
+    {
+      g_delta_time = (f32)os_timer_seconds(&g_frame_timer);
+      g_fps = 1.0f / g_delta_time;
+      g_frame_counter += 1;
+      os_timer_reset(&g_frame_timer);
+    }
+
+    input_update();
+    simulation(frame_arena);
+    r_render(camera3d_get_view_matrix(&g_camera), mat4f32_perspective(g_camera.fov, g_os_window.dimensions.x, g_os_window.dimensions.y, 0.1f, 100.0f));
+
+    // Close frame
+    {
+      arena_pop_to(frame_arena, frame_arena_initial_position);
+    }
+  }
+}</code></pre>
+          <p>Demo</p>
+          <img src="assets/project_showcase/fz_render_3d.gif" alt="odin-waveformat" class="cv-gif">
+        </li>
+        <hr>
+        <li>
+          <strong>Odin simple parser for waveformat (.obj) </strong>:
+          <a href="https://github.com/FranciscoZacarias/noname-odin">github</a>.
+          <p>A simple and limited parser for waveformat (.obj) mesh format to learn the Odin language. <a href="#">link</a>.</p>
+          <p>Here is Suzanne Mesh showcase from this small project:</p>
+          <img src="assets/project_showcase/odin_waveformat.png" alt="odin-waveformat" class="cv-gif">
+        </li>
+        <hr>
+        <li>
+          <strong>Algorithm visualizer in Java</strong>:
+          <a href="https://github.com/FranciscoZacarias/Algorithm-Visualizer-JavaFX">github</a>
+          <a href="https://www.youtube.com/watch?v=AfZ-rd4iG1E">video showcase</a>
+          <p>JavaFX project to visualize pathfinding and maze generation algorithms. This was one of my first personal projects ever - which used JavaFX (eventhough these days I try to write my own renderer).</p>
+          <p>Here is a showcase of two visualizations of pathfinding and maze generation algorithms</p>
+          <img src="assets/project_showcase/weightdijkstra.gif" alt="pathfinding" class="cv-gif">
+          <img src="assets/project_showcase/backtracker.gif" alt="maze-generation" class="cv-gif">
+        </li>
+        <hr>
+      </ul>
     </section>
 
     <section id="cv" class="page" style="display:none;">
-      <h1>My CV</h1>
-      <p>Education, work experience, skills, etc.</p>
-    </section>
-    <section id="blog" class="page" style="display:none;">
+      <h1>Professional experience (Updated August/2024) </h1>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <a href="assets/FranciscoBelchiorZacarias_CV.pdf" download class="download-btn">PDF Version</a>
+      </div>
 
-    <section>
+      <h2>Francisco Zacarias</h2>
+      <p>
+        +351 965437730 | franciscobelchiorzacarias@gmail.com<br>
+        <a href="https://www.linkedin.com/in/franciscozacarias/" target="_blank">linkedin.com/in/franciscozacarias</a> |
+        <a href="https://github.com/FranciscoZacarias" target="_blank">github.com/FranciscoZacarias</a>
+      </p>
+
+      <h3>About Me</h3>
+      <p>
+        Passionate about low level programming, engines, graphics and optimizations.
+        Strong problem-solving mentality with a wide range of technical skills.
+        Experienced in low level systems, R&amp;D, and tools programming for game development.
+      </p>
+
+      <h3>Experience</h3>
+      <div>
+        <h4>Tools Programmer — Toadman Interactive</h4>
+        <p><em>November 2023 – Present | Berlin, Germany</em></p>
+        <ul>
+          <li>Developed a Python server-side application integrating multiple tools and services for the studio, centralized for Slack access. Automated Jenkins, Perforce, and Unreal Engine notifications.</li>
+          <li>Created a bug report tool in Unreal Engine integrating with Jira for automated issue creation.</li>
+          <li>Built a custom crash reporting system forwarding Unreal Engine crashes to a backend, logging detailed reports on Slack.</li>
+          <li>Integrated ImGui into Unreal Engine with support for custom debug UI using engine reflection flags.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Software Engineer — Beyond Vision</h4>
+        <p><em>August 2021 – November 2023 | Lisbon, Portugal</em></p>
+        <ul>
+          <li>Implemented multiple embedded firmware applications in C, including data logging and MAVLink protocol communication.</li>
+          <li>Worked on Linux kernel drivers to integrate custom hardware platforms.</li>
+          <li>Developed real-time systems in ROS (C++ and Python) for sensor data acquisition and flight operations.</li>
+          <li>Experience with drone stack: Mavlink, Ardupilot, PX4, QGroundControl, MissionPlanner. Web development, SQL, Android, multimedia.</li>
+        </ul>
+      </div>
+
+      <h3>Personal Projects</h3>
+      <div>
+        <h4>Graphics Application — C, OpenGL, Linear Math, GLSL</h4>
+        <p>
+          <a href="https://github.com/FranciscoZacarias/noname" target="_blank">GitHub Repository - noname</a> |
+          <a href="https://www.youtube.com/watch?v=EnGcnkr7cwQ" target="_blank">Video Showcase</a>
+        </p>
+        <ul>
+          <li>Program written in C and OpenGL with a custom core library for math, memory, file I/O, and strings.</li>
+          <li>Features: mouse picking, selection, translation gizmo, shader and variable hotloading, text rendering, anti aliasing, saving program state.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Algorithm Visualizer — JavaFX</h4>
+        <p><a href="https://github.com/FranciscoZacarias/Algorithm-Visualizer-JavaFX" target="_blank">GitHub Repository</a></p>
+        <ul>
+          <li>Interactive GUI application to visualize path-finding and maze generation algorithms on a 2D grid.</li>
+        </ul>
+      </div>
+
+      <h3>Technical Skills</h3>
+      <ul>
+        <li><strong>Languages:</strong> C, C++, Python</li>
+        <li><strong>Tools:</strong> Windows, Linux, Git, Visual Studio, RemedyBG, Linear Math</li>
+        <li><strong>Interests:</strong> Systems engineering, computer graphics (OpenGL), game engines, performance-oriented development</li>
+      </ul>
+    </section>
+
+    <section id="blog" class="page" style="display:none;">
       <h1>Blog</h1>
       <nav>
         <ul>
           <li><a href="#developing-imgui">Developing an Immediate Mode GUI</a></li>
+          <li><a href="#hephaestus">Hepheastus - A table driven code generator</a></li>
           <li><a href="#developing-c-codebase">Developing a C codebase</a></li>
         </ul>
       </nav>
+
+      <hr><hr>
+
       <article id="developing-imgui">
         <h2>Developing an Immediate Mode GUI</h2>
         <time datetime="2025-10-01">October 1, 2025</time>
       </article>
+
+      <hr><hr>
+
+      <!-- hephaestus article -->
+      <article id="hephaestus">
+        <h2>Hephaestus - A table driven code generator</h2>
+        <time datetime="2025-10-01">October 10, 2025</time>
+        <p>
+          <strong>Hephaestus</strong> is a small DSL I built to automate C code generation. It's heavily inspired by <a href="https://www.rfleury.com/p/table-driven-code-generation">this article</a>.
+          I needed something fast and minimal that integrates directly with C projects,
+          so I wrote it myself. The language is table-driven: you declare structured data and templates,
+          and it outputs C source code with no extra runtime dependencies.
+        </p>
+        <h3>Basic Configuration</h3>
+        <p>
+          You can define global settings like output file name and path:
+        </p>
+        <pre><code>@config
+{
+  @output_file_name `test_file.c`
+  @output_file_path `../src/generated/`
+}</code></pre>
+        <h3>Table Definition</h3>
+        <p>
+          Tables describe the structured data that drives the generation:
+        </p>
+        <pre><code>@table
+Stack_Table (name type default_value max)
+{
+  { node              UI_Node*             (UI_Node){0}                   32 }
+  { top_left          Vec2f32              `vec2f32(0.0f, 0.0f)`          32 }
+  { size_x            f32                   g_os_window.dimensions.x      32 }
+  { size_y            f32                   g_os_window.dimensions.y      32 }
+  { spacing_y         f32                   0.0f                          32 }
+  { alignment_kind    UI_Alignment_Kind    UI_Alignment_Kind_Y            32 }
+  { width_kind        UI_Width_Kind        UI_Width_Kind_Fill             32 }
+  { height_kind       UI_Height_Kind       UI_Height_Kind_Fill            32 }
+  { node_color_scheme UI_Node_Color_Scheme ui_context.color_scheme.window 32 }
+  { border_color      Color                PURPLE(1)                      32 }
+  { background_color  Color                PURPLE(1)                      32 }
+}</code></pre>
+        <h3>Code Generation Template</h3>
+        <p>
+          Templates allow to generate single instances of code or iterate over table rows.
+          Beyond using table data, you can also use built-in variables and functions, such as $(@index) and $(@time_now).
+          Here is an example that generates stack data structures for each row in the Stack_Table:
+        </p>
+        <pre><code>@generate
+{
+  `// @Hephaestus generated code $(@time_now) \n\n`
+  @foreach(Stack_Table) `// Row $(@index)\ntypedef struct $(name) $(name);\nstruct $(name)_stack\n{\n  $(type) data[$(max)];\n  u32 top_index;\n  $(type) bottom_val;\n};\n\n\n`
+}</code></pre>
+        <h3>Generated Output</h3>
+        <p>
+          This produces the following output - which in this case is meant ot be C boilerplate code:
+        </p>
+        <pre><code>// @Hephaestus generated code 2025-October-08 15:53:23 
+// Row 0
+typedef struct node node;
+struct node_stack
+{
+  UI_Node* data[32];
+  u32 top_index;
+  UI_Node* bottom_val;
+};
+
+// Row 1
+typedef struct top_left top_left;
+struct top_left_stack
+{
+  Vec2f32 data[32];
+  u32 top_index;
+  Vec2f32 bottom_val;
+};
+
+// Row 2
+typedef struct size_x size_x;
+struct size_x_stack
+{
+  f32 data[32];
+  u32 top_index;
+  f32 bottom_val;
+};
+
+(...)</code></pre>
+      </article>
+
+      <hr><hr>
+
       <article id="developing-c-codebase">
-        <h2>Developing a C codebase</h2>
-        <time datetime="2025-10-01">October 1, 2025</time>
+        <h2>Developing my C codebase</h2>
+        <time datetime="2025-10-10">October 10, 2025</time>
+
+        <section>
+          <h3>What this is</h3>
+          <p>This is a focused C codebase I wrote to avoid external runtime layers and heavy clib dependencies. It trades convenience for predictability and control. Everything is explicit. Allocations, temporaries, logging, OS interfaces...
+            Most importantly, I have full ownership of the code. I can audit it quickly and understand all the moving parts, and modify or extend the API as needed.
+          </p>
+        </section>
+
+        <section>
+          <h3>Why plain C</h3>
+          <p>Choice reasons, short:</p>
+          <ul>
+            <li>Deterministic memory layout and ABI stability.</li>
+            <li>Minimal runtime. No hidden allocators or exceptions.</li>
+            <li>Easy to integrate with multiple OS backends and graphics APIs.</li>
+            <li>Tooling and compilers are ubiquitous for C. You get predictable codegen.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Memory: Arenas and scratch temporaries</h3>
+          <p>All heap-style allocation uses <code>Arena</code> objects. Arenas reserve a contiguous range, commit pages on demand, and maintain a single growing position. Pop is explicit and cheap.</p>
+
+          <pre><code>// core arena API (excerpt)
+Arena* arena = arena_alloc(); // allocate a new arena
+Mat4f32* mat = push_array(arena, Mat4f32, 1); // allocate one Mat4f32</code></pre>
+
+          <p>One of the most convinent things about this style of allocation is that, by necessity, functions that require a memory allocation will ask for an Arena* in their arguments - so the caller
+            is always aware when a function will make an allocation and is in control over that allocation's lifetime. </p>
+          <p>E.g:</p>
+          <pre><code>function String8
+string8_copy(Arena* arena, String8 source)
+{
+  String8 result;
+  result.size = source.size;
+  result.str  = push_array(arena, u8, result.size);
+  MemoryCopy(result.str, source.str, result.size);
+  return result;
+}</code></pre>
+
+          <p>Can also be used to create scoped scratch arenas via the thread-local context. They are temporary and fast.</p>
+
+          <pre><code>// scratch usage
+{
+  Scratch scratch = scratch_begin(conflicts, count);
+  T* temp = push_array(scratch.arena, T, n);
+  // use scratch arena for temporary allocations...
+  scratch_end(&scratch);
+}</code></pre>
+        </section>
+
+        <section>
+          <h3>Strings: String8 (immutable by convention)</h3>
+          <p>Strings are 8-bit length-prefixed views. They are not owning by default. Treat them as immutable slices. Copy or allocate into an arena if you need ownership.</p>
+
+          <pre><code>typedef struct String8 String8;
+struct String8 {
+  u64 size;
+  u8* str;
+};
+#define S(s) (String8){sizeof(s)-1, (u8*)(s)}
+#define Sf(arena,fmt,...) string8_from_format(arena, fmt, __VA_ARGS__)</code></pre>
+
+          <p>String helpers return <code>String8</code>. If you need permanent storage use <code>push_array</code> into an arena or use arena-based format helpers.</p>
+        </section>
+
+        <section>
+          <h3>Error handling and logging</h3>
+          <p>Logging is explicit and arena-backed. Errors are logged as entries with timestamp, file, and line. The log context stores entries in an arena to avoid dynamic allocations when reporting failures.</p>
+
+          <pre><code>typedef enum { Log_Level_Info, Log_Level_Warning, Log_Level_Error, Log_Level_Fatal } Log_Level;
+struct Log_Entry { Log_Level level; String8 message; String8 file; u32 line; OS_Date_Time timestamp; };
+global Log_Context g_log_context;
+function void log_init(String8 error_log_path);
+function void log_emit(Log_Level level, String8 message, String8 file, u32 line);
+#define emit_error(str8_msg) log_emit(Log_Level_Error, str8_msg, S(__FILE__), __LINE__)</code></pre>
+
+          <p>Design rule: emit logs, but don’t rely on them to free resources. Use them to diagnose and exit or continue deterministically.</p>
+        </section>
+
+        <section>
+          <h3>OS abstraction and entry point</h3>
+          <p>The code separates platform-specific pieces behind a small OS API. That API covers console I/O, window creation, OpenGL hookup, and memory page operations. The app code calls a single standard entry point and the platform layer adapts.</p>
+
+          <pre><code>// portable entry point
+function void
+main_thread_base_entry_point(int argc, char **argv)
+{
+  os_time_init();
+
+  // Setup log system
+  {
+    Scratch scratch = scratch_begin(0, 0);
+    String8 log_path = os_executable_path(scratch.arena);
+    log_path = os_directory_pop(log_path); // Pop the applicatin.exe file
+    log_path = os_directory_pop(log_path); // Pop from build directory
+    log_init(log_path);
+    emit_info(S(">>>> Entry point <<<<"));
+    scratch_end(&scratch);
+  }
+
+  Command_Line cmd_line = command_line_parse_from_argc_argv(argc, argv);
+  entry_point(&cmd_line);
+}</code></pre>
+
+          <p>The user has to then implement <code>function void entry_point(Command_Line* command_line)</code> as the application's entry point</p>
+
+          <p>Platform layer responsibilities:</p>
+          <ul>
+            <li>Map native event loop to the base entry point.</li>
+            <li>Create windows and graphical contexts where required.</li>
+            <li>Provide page-size and virtual memory helpers used by arenas.</li>
+            <li>Parse platform argc/argv into <code>Command_Line</code>.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Command line parsing</h3>
+          <p>Command line parsing yields a fixed-size array of args. Flags and key/value pairs are clearly separated. The parser returns a <code>Command_Line</code> struct backed by <code>String8</code> slices.</p>
+
+          <pre><code> struct Command_Line
+{
+  String8 executable;
+  String8 raw_args;
+  Command_Line_Arg args[MAX_COMMAND_LINE_ARGS];
+  u32 args_count;
+};
+function Command_Line command_line_parse_from_argc_argv(s32 argc, u8** argv);
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>How to use it, concisely</h3>
+          <ol>
+            <li>Initialize OS layer and thread context.</li>
+            <li>Create arenas for long-lived storage and caches.</li>
+            <li>Use scratch arenas for short-lived temporaries.</li>
+            <li>Use <code>String8</code> as view types, allocate into arenas when ownership is needed.</li>
+            <li>Log via <code>log_emit</code>. React to fatal logs deterministically.</li>
+            <li>Keep platform-specific code isolated behind small OS APIs.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h3>Design constraints and tradeoffs</h3>
+          <p>Tradeoffs made deliberately:</p>
+          <ul>
+            <li>No dynamic object lifecycle managers. You manage lifetimes via arenas and scope.</li>
+            <li>Limited convenience functions. Explicit over implicit operations.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Example full snippet</h3>
+          <p>Minimal startup sketch showing the pieces together.</p>
+
+          <pre><code>#include "fz_base.h"
+
+function void
+input_update()
+{
+  if (input_is_key_pressed(Keyboard_Key_ESCAPE))
+  {
+    os_exit_process(0);
+  }
+}
+
+function void
+entry_point(Command_Line* command_line)
+{
+  Arena* arena = arena_alloc();
+
+  os_console_init();
+  os_window_init(400, 400, S("fz_std_tests"));
+  os_opengl_init();
+  os_window_open();
+
+  f32 phase = 0.0f;
+  const f32 speed = 0.05f;
+  const f32 tau = PI*2;
+
+  os_window_enable_vsync(true);
+  while(os_is_application_running())
+  {
+    input_update();
+
+    phase += speed;
+    if (phase > tau) phase -= tau;
+    f32 t = (1.0f + cosf(phase)) * 0.5f;
+    f32 r = (1.0f + cosf(phase)) * 0.5f;
+    f32 g = (1.0f + cosf(phase - tau/3)) * 0.5f;
+    f32 b = (1.0f + cosf(phase - 2*tau/3)) * 0.5f;
+    glClearColor(r, g, b, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+    os_swap_buffers();
+  }
+}</code></pre>
+        </section>
+        <hr>
+        <section>
+          <p>This codebase is everchanging. Every project I form new opinions and I'm not afraid of implementing and trying them. The most important thing for me is that it suits my programming style. It is not designed to be used by anyone but me.
+            I strive for it to fit projects that need explicit control. It brings me joy.</p>
+        </section>
       </article>
     </section>
   </main>
 
-  <footer> <div class="footer-content">
-    <span>
-      &copy; Francisco Zacarias
-    </span>
-    <span class="social-icons">
-      <a href="https://github.com/FranciscoZacarias" target="_blank" aria-label="GitHub"> <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"> <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.263.82-.583 0-.288-.012-1.244-.018-2.44-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.334-1.753-1.334-1.753-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.805 1.304 3.49.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.333-5.466-5.932 0-1.31.468-2.382 1.235-3.222-.124-.303-.536-1.527.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.984-.398 3.003-.403 1.02.005 2.047.137 3.006.403 2.288-1.552 3.295-1.23 3.295-1.23.655 1.649.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.807 5.624-5.479 5.921.43.37.815 1.096.815 2.21 0 1.596-.015 2.884-.015 3.275 0 .323.218.7.825.581C20.565 21.796 24 17.3 24 12c0-6.63-5.37-12-12-12z"/> </svg> </a>
-      <a href="https://www.linkedin.com/in/franciscozacarias/" target="_blank" aria-label="LinkedIn"> <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"> <path d="M22.23 0H1.77C.79 0 0 .774 0 1.727v20.545C0 23.226.79 24 1.77 24h20.46c.98 0 1.77-.774 1.77-1.727V1.727C24 .774 23.21 0 22.23 0zM7.08 20.452H3.548V9h3.532v11.452zM5.314 7.57a2.046 2.046 0 1 1 0-4.092 2.046 2.046 0 0 1 0 4.092zM20.452 20.452h-3.53v-5.605c0-1.336-.026-3.054-1.86-3.054-1.86 0-2.144 1.45-2.144 2.948v5.711h-3.53V9h3.392v1.561h.05c.472-.895 1.628-1.838 3.353-1.838 3.585 0 4.245 2.36 4.245 5.428v6.3z"/> </svg> </a>
-      <a href="https://www.youtube.com/@fzac" target="_blank" aria-label="YouTube"> <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"> <path d="M23.498 6.186a2.964 2.964 0 0 0-2.084-2.09C19.7 3.5 12 3.5 12 3.5s-7.7 0-9.414.596a2.964 2.964 0 0 0-2.084 2.09A30.132 30.132 0 0 0 0 12a30.132 30.132 0 0 0 .502 5.814 2.964 2.964 0 0 0 2.084 2.09C4.3 20.5 12 20.5 12 20.5s7.7 0 9.414-.596a2.964 2.964 0 0 0 2.084-2.09A30.132 30.132 0 0 0 24 12a30.132 30.132 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/> </svg> </a>
-    </span>
-  </div> </footer>
+  <footer>
+    <div class="footer-content">
+      <span>
+        &copy; Francisco Zacarias
+      </span>
+      <span class="social-icons">
+        <a href="https://github.com/FranciscoZacarias" target="_blank" aria-label="GitHub">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.263.82-.583 0-.288-.012-1.244-.018-2.44-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.334-1.753-1.334-1.753-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.805 1.304 3.49.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.333-5.466-5.932 0-1.31.468-2.382 1.235-3.222-.124-.303-.536-1.527.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.984-.398 3.003-.403 1.02.005 2.047.137 3.006.403 2.288-1.552 3.295-1.23 3.295-1.23.655 1.649.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.807 5.624-5.479 5.921.43.37.815 1.096.815 2.21 0 1.596-.015 2.884-.015 3.275 0 .323.218.7.825.581C20.565 21.796 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/franciscozacarias/" target="_blank" aria-label="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M22.23 0H1.77C.79 0 0 .774 0 1.727v20.545C0 23.226.79 24 1.77 24h20.46c.98 0 1.77-.774 1.77-1.727V1.727C24 .774 23.21 0 22.23 0zM7.08 20.452H3.548V9h3.532v11.452zM5.314 7.57a2.046 2.046 0 1 1 0-4.092 2.046 2.046 0 0 1 0 4.092zM20.452 20.452h-3.53v-5.605c0-1.336-.026-3.054-1.86-3.054-1.86 0-2.144 1.45-2.144 2.948v5.711h-3.53V9h3.392v1.561h.05c.472-.895 1.628-1.838 3.353-1.838 3.585 0 4.245 2.36 4.245 5.428v6.3z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@fzac" target="_blank" aria-label="YouTube">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a2.964 2.964 0 0 0-2.084-2.09C19.7 3.5 12 3.5 12 3.5s-7.7 0-9.414.596a2.964 2.964 0 0 0-2.084 2.09A30.132 30.132 0 0 0 0 12a30.132 30.132 0 0 0 .502 5.814 2.964 2.964 0 0 0 2.084 2.09C4.3 20.5 12 20.5 12 20.5s7.7 0 9.414-.596a2.964 2.964 0 0 0 2.084-2.09A30.132 30.132 0 0 0 24 12a30.132 30.132 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </span>
+    </div>
+  </footer>
 </body>
 
 <script>
-var nav_links = document.querySelectorAll("a[data-page]");
-var pages     = document.getElementsByClassName("page");
+  var nav_links = document.querySelectorAll("a[data-page]");
+  var pages = document.getElementsByClassName("page");
 
-function
-show_page(page_id)
-{
+  function show_page(page_id) {
+    var i;
+    for (i = 0; i < pages.length; i = i + 1) {
+      if (pages[i].id === page_id) {
+        pages[i].style.display = "block";
+      } else {
+        pages[i].style.display = "none";
+      }
+    }
+
+    for (i = 0; i < nav_links.length; i = i + 1) {
+      if (nav_links[i].getAttribute("data-page") === page_id) {
+        nav_links[i].className = "nav-link active";
+      } else {
+        nav_links[i].className = "nav-link";
+      }
+    }
+
+    location.hash = page_id;
+  }
+
   var i;
-  for (i = 0; i < pages.length; i = i + 1)
-  {
-    if (pages[i].id === page_id)
-    {
-      pages[i].style.display = "block";
-    }
-    else
-    {
-      pages[i].style.display = "none";
-    }
+  for (i = 0; i < nav_links.length; i = i + 1) {
+    nav_links[i].addEventListener("click", function (e) {
+      e.preventDefault();
+      show_page(this.getAttribute("data-page"));
+    });
   }
 
-  for (i = 0; i < nav_links.length; i = i + 1)
-  {
-    if (nav_links[i].getAttribute("data-page") === page_id)
-    {
-      nav_links[i].className = "nav-link active";
-    }
-    else
-    {
-      nav_links[i].className = "nav-link";
-    }
+  var blog_links = document.querySelectorAll("#blog nav a");
+  for (i = 0; i < blog_links.length; i = i + 1) {
+    blog_links[i].addEventListener("click", function (e) {
+      e.preventDefault();
+      var target_id = this.getAttribute("href").substr(1);
+      var target = document.getElementById(target_id);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    });
   }
 
-  location.hash = page_id;
-}
-
-var i;
-for (i = 0; i < nav_links.length; i = i + 1)
-{
-  nav_links[i].addEventListener("click", function(e)
-  {
-    e.preventDefault();
-    show_page(this.getAttribute("data-page"));
-  });
-}
-
-var blog_links = document.querySelectorAll("#blog nav a");
-for (i = 0; i < blog_links.length; i = i + 1)
-{
-  blog_links[i].addEventListener("click", function(e)
-  {
-    e.preventDefault();
-    var target_id = this.getAttribute("href").substr(1);
-    var target = document.getElementById(target_id);
-    if (target)
-    {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  });
-}
-
-var page = "home";
-if (location.hash && location.hash.length > 1)
-{
-  page = location.hash.substr(1);
-}
-
-show_page(page);
-
-window.onhashchange = function()
-{
   var page = "home";
-  if (location.hash && location.hash.length > 1)
-  {
+  if (location.hash && location.hash.length > 1) {
     page = location.hash.substr(1);
   }
+
   show_page(page);
-};
+
+  window.onhashchange = function () {
+    var page = "home";
+    if (location.hash && location.hash.length > 1) {
+      page = location.hash.substr(1);
+    }
+    show_page(page);
+  };
 </script>
 
 <style>
-@font-face {
-  font-family: 'Karmina';
-  src: url('assets/fonts/Karmina.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
+  @font-face {
+    font-family: 'Karmina';
+    src: url('assets/fonts/Karmina.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-html, body {
-  margin: 0;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: 'Karmina', sans-serif;
-}
+  html,
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Karmina', sans-serif;
+  }
 
-header {
-  text-align: center;
-  padding: 1rem;
-  background: #f5f5f5;
-}
+  header {
+    text-align: center;
+    padding: 1rem;
+    background: #f5f5f5;
+  }
 
-nav a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: black;
-}
+  nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: black;
+  }
 
-nav a.active {
-  font-weight: bold;
-  text-decoration: underline;
-}
+  nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
 
-main {
-  flex: 1;
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
+  main {
+    flex: 1;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #f5f5f5;
-}
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background: #f5f5f5;
+  }
 
-.social-icons a {
-  margin: 0 0.1rem;
-  color: black;
-  text-decoration: none;
-}
+  .social-icons a {
+    margin: 0 0.1rem;
+    color: black;
+    text-decoration: none;
+  }
 
-.footer-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.1rem;
-}
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+  }
 
-.social-icons a {
-  margin: 0 0.3rem;
-  color: black;
-  text-decoration: none;
-  transition: color 0.2s;
-}
+  .social-icons a {
+    margin: 0 0.3rem;
+    color: black;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
 
-.social-icons a:hover {
-  color: #0073b1;
-}
+  .social-icons a:hover {
+    color: #0073b1;
+  }
 
-.social-icons svg {
-  width: 16px;
-  height: 16px;
-  vertical-align: middle;
-}
+  .social-icons svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+  }
 
-article h2 {
-  margin: 0 0 0.2em 0; /* tiny margin below title */
-}
+  article h2 {
+    margin: 0 0 0.2em 0;
+    /* tiny margin below title */
+  }
 
-article time {
-  display: block;
-  font-size: 0.9em;
-  color: #666;
-  margin: 0; /* no extra margin */
-}
+  article time {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+    /* no extra margin */
+  }
 
-article p {
-  margin: 0.4em 0 1em 0; /* small margin above paragraph */
-}
+  article p {
+    margin: 0.4em 0 1em 0;
+    /* small margin above paragraph */
+  }
 
+  code {
+    border: 2px solid #ccc;
+    background-color: #ececec;
+    padding: 0.2em 0.4em;
+    border-radius: 8px;
+    font-family: monospace;
+  }
+
+  pre code {
+    display: block;
+    padding: 1em;
+    overflow-x: auto;
+  }
+
+  .cv-gif {
+    display: block;
+    margin-top: 0.5em;
+    max-width: 100%;
+    border: 2px solid #ccc;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    padding: 6px;
+  }
 </style>
 
 </html>
