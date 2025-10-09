@@ -410,25 +410,14 @@ struct size_x_stack
         <time datetime="2025-10-10">October 10, 2025</time>
 
         <section>
-          <h3>What this is</h3>
-          <p>This is a focused C codebase I wrote to avoid external runtime layers and heavy clib dependencies. It trades convenience for predictability and control. Everything is explicit. Allocations, temporaries, logging, OS interfaces...
-            Most importantly, I have full ownership of the code. I can audit it quickly and understand all the moving parts, and modify or extend the API as needed.
+          <h3>Motivation</h3>
+          <p>I needed a focused C codebase to avoid external runtime layers and heavy clib dependencies. Everything is explicit. Allocations, logging, OS interfaces...
+            Most importantly, I have full ownership of the code. I can audit it quickly and understand all the moving parts, modify and extend the API as needed.
           </p>
         </section>
 
         <section>
-          <h3>Why plain C</h3>
-          <p>Choice reasons, short:</p>
-          <ul>
-            <li>Deterministic memory layout and ABI stability.</li>
-            <li>Minimal runtime. No hidden allocators or exceptions.</li>
-            <li>Easy to integrate with multiple OS backends and graphics APIs.</li>
-            <li>Tooling and compilers are ubiquitous for C. You get predictable codegen.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Memory: Arenas and scratch temporaries</h3>
+          <h3>Memory: Arenas and scratch arenas</h3>
           <p>All heap-style allocation uses <code>Arena</code> objects. Arenas reserve a contiguous range, commit pages on demand, and maintain a single growing position. Pop is explicit and cheap.</p>
 
           <pre><code>// core arena API (excerpt)
@@ -448,7 +437,7 @@ string8_copy(Arena* arena, String8 source)
   return result;
 }</code></pre>
 
-          <p>Can also be used to create scoped scratch arenas via the thread-local context. They are temporary and fast.</p>
+          <p>Can also be used to create scoped scratch arenas via the thread-local context. They're lifetime stretches between <code>scratch_begin(0,0)</code> and <code>scratch_end(&scratch)</code>. Because deallocating arenas is as cheap as moving a pointer around, this operation is as cheap is it gets for memory allocations.</p>
 
           <pre><code>// scratch usage
 {
