@@ -269,7 +269,7 @@ entry_point(Command_Line* command_line)
       </div>
 
       <div>
-        <h4>Tools Programmer — GRIP Studios</h4>
+        <h4>Tools Programmer - GRIP Studios</h4>
         <p><em>February 2025 – Present | Prague, Czech Republic</em></p>
         <ul>
           <li>Working on a city building tool for an unnanounced project.</li>
@@ -277,7 +277,7 @@ entry_point(Command_Line* command_line)
       </div>
 
       <div>
-        <h4>Tools Programmer — Toadman Interactive</h4>
+        <h4>Tools Programmer - Toadman Interactive</h4>
         <p><em>November 2023 – January 2025 | Berlin, Germany</em></p>
         <ul>
           <li>Developed a Python server-side application integrating multiple tools and services for the studio, centralized for Slack access. Automated Jenkins, Perforce, and Unreal Engine notifications.</li>
@@ -288,7 +288,7 @@ entry_point(Command_Line* command_line)
       </div>
 
       <div>
-        <h4>Software Engineer — Beyond Vision (Drone industry) </h4>
+        <h4>Software Engineer - Beyond Vision (Drone industry) </h4>
         <p><em>August 2021 – November 2023 | Lisbon, Portugal</em></p>
         <ul>
           <li>Implemented multiple embedded firmware applications in C, including data logging and MAVLink protocol communication.</li>
@@ -323,26 +323,47 @@ entry_point(Command_Line* command_line)
       <article id="hephaestus">
         <h2>Hephaestus - A table driven code generator</h2>
         <time datetime="2025-10-01">October 10, 2025</time>
+
         <p>
-          <strong>Hephaestus</strong> is a small DSL I built to automate C code generation. It's heavily inspired by <a href="https://www.rfleury.com/p/table-driven-code-generation">this article</a>.
-          I needed something fast and minimal that integrates directly with C projects,
-          so I wrote it myself. The language is table-driven: you declare structured data and templates,
-          and it outputs C source code with no extra runtime dependencies.
+          <strong>Hephaestus</strong> is a table-driven text generator heavily inspired by
+          <a href="https://www.rfleury.com/p/table-driven-code-generation">this article</a>.
+          It defines structured data tables and generation templates for text generation.
+          The goal is speed, simplicity, and direct C integration with no external runtime dependencies.
         </p>
-        <h3>Basic Configuration</h3>
+
+        <hr>
+
+        <h3>1. Global Scopes</h3>
+
+        <h4>@config</h4>
         <p>
-          You can define global settings like output file name and path:
+          The <code>@config</code> block defines global configuration parameters for the generation process.
+          These can be referenced anywhere in the file.
         </p>
+
         <pre><code>@config
 {
-  @output_file_name `test_file.c`
-  @output_file_path `../src/generated/`
+  @output_file_name `test_file`
+  @output_path `../src/generated/`
 }</code></pre>
-        <h3>Table Definition</h3>
+
+        <p><strong>Supported keys:</strong></p>
+        <ul>
+          <li><code>@output_file_name</code> - Name of the generated file (without extensions). Hephaestus appends <code>.hephaestus.&lt;ext&gt;</code> based on the generator type.</li>
+          <li><code>@output_path</code> - Relative or absolute path to the output directory.</li>
+        </ul>
+
+        <p>More configuration options may be added later.</p>
+
+        <hr>
+
+        <h3>2. Table Definition</h3>
         <p>
-          Tables describe the structured data that drives the generation:
+          The <code>@table</code> block defines structured data rows used by generators.
+          Each row becomes a data record that can be referenced in <code>@generate</code> blocks.
         </p>
-        <pre><code>@table
+
+        <pre><code>@table // Defines stacks for different types
 Stack_Table (name type default_value max)
 {
   { node              UI_Node*             (UI_Node){0}                   32 }
@@ -357,22 +378,94 @@ Stack_Table (name type default_value max)
   { border_color      Color                PURPLE(1)                      32 }
   { background_color  Color                PURPLE(1)                      32 }
 }</code></pre>
-        <h3>Code Generation Template</h3>
+
+        <ul>
+          <li><code>Stack_Table</code> - table name.</li>
+          <li><code>(name type default_value max)</code> - column headers.</li>
+          <li>Each <code>{ ... }</code> entry defines one data row.</li>
+        </ul>
+
+        <hr>
+
+        <h3>3. Code Generation</h3>
         <p>
-          Templates allow to generate single instances of code or iterate over table rows.
-          Beyond using table data, you can also use built-in variables and functions, such as $(@index) and $(@time_now).
-          Here is an example that generates stack data structures for each row in the Stack_Table:
+          A <code>@generate</code> block defines a text output template. It can contain static text, loops, and variable interpolations.
+          The generator type determines the output file extension (e.g. <code>@generate @c_file</code> or <code>@generate @h_file</code>).
         </p>
-        <pre><code>@generate
+
+        <pre><code>@generate @c_file
 {
   `// @Hephaestus generated code $(@time_now) \n\n`
   @foreach(Stack_Table) `// Row $(@index)\ntypedef struct $(name) $(name);\nstruct $(name)_stack\n{\n  $(type) data[$(max)];\n  u32 top_index;\n  $(type) bottom_val;\n};\n\n\n`
 }</code></pre>
-        <h3>Generated Output</h3>
+
+        <p><strong>Notes:</strong></p>
+        <ul>
+          <li>Static text is wrapped in backticks.</li>
+          <li><code>@foreach(TableName)</code> repeats its inner content for each row in that table.</li>
+          <li>Variable substitution uses <code>$()</code>.</li>
+        </ul>
+
+        <hr>
+
+        <h3>4. Implicit Variables</h3>
+        <p>Hephaestus automatically provides certain implicit variables:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Description</th>
+              <th>Example Output</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@index</code></td>
+              <td>Current iteration index during a <code>@foreach</code></td>
+              <td>0, 1, 2, ...</td>
+            </tr>
+            <tr>
+              <td><code>@time_now</code></td>
+              <td>Current timestamp when generation runs</td>
+              <td>2025-October-08 14:27:56</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>New implicit variables may be introduced in future versions.</p>
+
+        <hr>
+
+        <h3>5. Variable Substitution and Operations</h3>
         <p>
-          This produces the following output - which in this case is meant ot be C boilerplate code:
+          You can reference table or config values using <code>$(variable)</code> inside a <code>@generate</code> block.
+          Simple arithmetic and string slicing operations are supported.
         </p>
+
+        <h4>Numeric Expansion</h4>
+        <pre><code>// If $(max) = 32:
+$(max+1) → 33
+$(max-1) → 31</code></pre>
+
+        <h4>String Expansion</h4>
+        <pre><code>// If $(name) = "Node":
+$(name+1) → "ode"
+$(name-1) → "Nod"</code></pre>
+
+        <hr>
+
+        <h3>6. Generation Example</h3>
+        <p>Below is are two complete example of input DSL and the generated C output:</p>
+
+        <h4>Input DSL for generating multiple structures (using previously defined Stack_Table):</h4>
+        <pre><code>@generate @c_file
+{
+  `// @Hephaestus generated code $(@time_now) \n\n`
+  @foreach(Stack_Table) `// Row $(@index)\ntypedef struct $(name) $(name);\nstruct $(name)_stack\n{\n  $(type) data[$(max)];\n  u32 top_index;\n  $(type) bottom_val;\n};\n\n\n`
+}</code></pre>
+
+        <h4>Generated Output</h4>
         <pre><code>// @Hephaestus generated code 2025-October-08 15:53:23 
+
 // Row 0
 typedef struct node node;
 struct node_stack
@@ -400,7 +493,46 @@ struct size_x_stack
   f32 bottom_val;
 };
 
-(...)</code></pre>
+...</code></pre>
+
+        <h3>6.1 Generation Example 2</h3>
+        <h4>Input DSL for generating a bit flag enum:</h4>
+        <pre><code>@table
+UI_Node_Flags_Table
+  (name documentation)
+{
+  { Mouse_Clickable          `Makes the node clickable`    }
+  { Display_Text             `Node shows text`             }
+  { Draggable                `TODO(fz): Add documentation` }
+  { Hoverable                `TODO(fz): Add documentation` }
+  { Center_Text_Horizontally `TODO(fz): Add documentation` }
+  { Center_Text_Vertically   `TODO(fz): Add documentation` }
+  { Dimensions_Wrap_Text     `TODO(fz): Add documentation` }
+}
+</code></pre>
+
+        <h4>Template for bitflag enum using the $(index) variable:</h4>
+        <pre><code>@generate @h_file
+{
+  `typedef u32 UI_Node_Flags;\n`
+  `enum\n{\n`
+  @foreach(UI_Node_Flags_Table) `  UI_Node_Flags_$(name) = (1 << $(@index)), /* $(documentation) */\n`
+  `};\n\n`
+}</code></pre>
+
+        <h4>Generated Output</h4>
+        <pre><code>typedef u32 UI_Node_Flags;
+enum
+{
+  UI_Node_Flags_Mouse_Clickable = (1 << 0), /* Makes the node clickable */
+  UI_Node_Flags_Display_Text = (1 << 1), /* Node shows text */
+  UI_Node_Flags_Draggable = (1 << 2), /* TODO(fz): Add documentation */
+  UI_Node_Flags_Hoverable = (1 << 3), /* TODO(fz): Add documentation */
+  UI_Node_Flags_Center_Text_Horizontally = (1 << 4), /* TODO(fz): Add documentation */
+  UI_Node_Flags_Center_Text_Vertically = (1 << 5), /* TODO(fz): Add documentation */
+  UI_Node_Flags_Dimensions_Wrap_Text = (1 << 6), /* TODO(fz): Add documentation */
+};</code></pre>
+
       </article>
 
       <hr><hr>
@@ -826,6 +958,28 @@ entry_point(Command_Line* command_line)
     background-color: #f5f5f5;
     border-radius: 6px;
     padding: 6px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 0.95rem;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background-color: #fafafa;
   }
 </style>
 
