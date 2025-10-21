@@ -4,7 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Francisco Zacarias</title>
-  <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>
+
+  <!-- For building trees -->
+  <script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true });
+  </script>
 </head>
 
 <header>
@@ -64,13 +69,73 @@
       <ul>
         <li>
           <strong>Immediate mode UI in C</strong>:
-          <p>How I developed my own immediate mode graphical user interface in C. </p>
+          <a href="https://github.com/FranciscoZacarias/fz_ui" target="_blank" >github</a>
+          <p>
+            I developed a rough prototype for an immediate mode UI in C. This was my second iteration of the prototype,
+            where I tried to use a different approach to the underlying UI tree. Essentially, each node of the tree is a quad
+            with some optionally displayed text, and each node has functionality that can be attached to it. 
+            With this approach, building widgets becomes almost a scripting task - you just create nodes and attach functionality to them.
+          </p>
+          <p>A UI window with some buttons and checkboxes</p>
+          <img src="assets/project_showcase/fz_ui.PNG" alt="fz_ui window" class="cv-gif">
+          <p>A UI window with debug enabled. While keeping in mind that every quad is a node with optional text, here you can see:</p>
+          <ol>
+            <li> Node boundries and clip quad. In most nodes here, the clip is slithgly smaller due to padding added.</li>
+            <li> Buttons, Labels and checkboxes. </li>
+            <li> Each node's cursor (defined with a small X), that shows where the next child of this node would've been drawn. </li>
+            <li> Vertical and horizontal layouts.</li>
+          </ol>
+          <img src="assets/project_showcase/fz_ui_boundries.PNG" alt="fz_ui window boundries" class="cv-gif">
+          <p>The following code is how you define this window in the application space:</p>
+          <pre><code class="language-c">// Booleans defined in the global scope for the checkboxes:
+global b32 a = false;
+global b32 b = false;
+global b32 c = false;
+
+...
+
+entry_point()
+{
+  while (1)
+  {
+    // ...
+
+    ui_top_left(vec2f32(200,200))
+    ui_size_fixed_x(x) ui_size_fixed_y(y)
+    ui_window(S("Test Window"))
+    {
+      ui_padding_fixed(5)
+      ui_row(S("Test Row"), 100)
+      {
+        ui_label(S("Label"));
+        ui_button(S("Button 1"));
+        ui_checkbox(S("Checkbox a"), &a);
+        ui_checkbox(S("Checkbox b"), &b);
+      }
+      ui_padding_fixed(5)
+      ui_row(S("Test Row 2"), 100)
+      {
+        ui_checkbox(S("Checkbox a"), &a);
+      }
+      ui_padding_fixed(5)
+      ui_column(S("Test column"), 200)
+      {
+        ui_label(S("More checkboxes"));
+        ui_checkbox(S("Checkbox b"), &b);
+        ui_checkbox(S("Checkbox c"), &c);
+      }
+    }
+    ui_end();
+    
+    // ...
+  }
+}</code></pre>
         </li>
         <hr>
         <li>
           <strong>OpenGL and C Project</strong>:
-          <a href="https://github.com/FranciscoZacarias/noname">github</a>
-          <a href="https://www.youtube.com/watch?v=EnGcnkr7cwQ">video showcase</a>
+          <a href="https://github.com/FranciscoZacarias/noname" target="_blank">github</a>
+          <a href="https://www.youtube.com/watch?v=EnGcnkr7cwQ" target="_blank">video showcase</a>
           <p>
             My first OpenGL project that also tests my first iteration of my codebase.
             It presents a 3D world with a small number of cubes that can be created,
@@ -81,7 +146,7 @@
         <hr>
         <li>
           <strong>C Codebase</strong>:
-          <a href="https://github.com/FranciscoZacarias/fz_std">github</a>.
+          <a href="https://github.com/FranciscoZacarias/fz_std" target="_blank">github</a>.
           <p>My handwritten and everchanging <code>C</code> codebase that I use in every C project. In many aspects a more sane foundation than the CLib to work on. </p>
           <p>Find more in my <a href="#blog" data-page="blog" class="nav-link">blog</a>.</p>
           <p>Example opengl project using this codebase: </p>
@@ -131,9 +196,14 @@ entry_point(Command_Line* command_line)
         <hr>
         <li>
           <strong>My code generator - Hephaestus</strong>:
-          <a href="https://github.com/FranciscoZacarias/hephaestus">github</a>.
-          <p>A table driven code generation tool capable of generating any type of structured text. </p>
+          <a href="https://github.com/FranciscoZacarias/hephaestus" target="_blank">github</a>.
+          <p>
+            A table driven code generation tool capable of generating any type of structured text.
+            This tool eliminates my need for any type of compile time code generation in C, since I can generate anything I want
+            up front, where the most recurrent usecase is implementing data structures that encode diffrent data types.
+          </p>
           <p>Find more in my <a href="#blog" data-page="blog" class="nav-link">blog</a>.</p>
+          <p>Generating multiple stack data structures for my UI system - without resorting to templates.</p>
           <pre><code>@table // Defines stacks for different types
 Stack_Table (name type default_value max)
 {
@@ -180,7 +250,7 @@ struct size_x_stack
         <hr>
         <li>
           <strong>C and Opengl 3D prototyping renderer template</strong>:
-          <a href="https://github.com/FranciscoZacarias/fz_render_3d">github</a>.
+          <a href="https://github.com/FranciscoZacarias/fz_render_3d" target="_blank">github</a>.
           <p>My Opengl and C 3D renderer (that uses instancing and batching) that I use as a template for graphical projects. It draws basic 3D primitives with colors and/or textures and supports text rendering. Good for just prototyping. </p>
           <p>Example project:</p>
           <pre><code>function void
@@ -243,7 +313,7 @@ entry_point(Command_Line* command_line)
         <hr>
         <li>
           <strong>Odin simple parser for waveformat (.obj) </strong>:
-          <a href="https://github.com/FranciscoZacarias/noname-odin">github</a>.
+          <a href="https://github.com/FranciscoZacarias/noname-odin" target="_blank">github</a>.
           <p>A simple and limited parser for waveformat (.obj) mesh format to learn the Odin language. <a href="#">link</a>.</p>
           <p>Here is Suzanne Mesh showcase from this small project:</p>
           <img src="assets/project_showcase/odin_waveformat.png" alt="odin-waveformat" class="cv-gif">
@@ -251,8 +321,8 @@ entry_point(Command_Line* command_line)
         <hr>
         <li>
           <strong>Algorithm visualizer in Java</strong>:
-          <a href="https://github.com/FranciscoZacarias/Algorithm-Visualizer-JavaFX">github</a>
-          <a href="https://www.youtube.com/watch?v=AfZ-rd4iG1E">video showcase</a>
+          <a href="https://github.com/FranciscoZacarias/Algorithm-Visualizer-JavaFX" target="_blank">github</a>
+          <a href="https://www.youtube.com/watch?v=AfZ-rd4iG1E" target="_blank">video showcase</a>
           <p>JavaFX project to visualize pathfinding and maze generation algorithms. This was one of my first personal projects ever - which used JavaFX (eventhough these days I try to write my own renderer).</p>
           <p>Here is a showcase of two visualizations of pathfinding and maze generation algorithms</p>
           <img src="assets/project_showcase/weightdijkstra.gif" alt="pathfinding" class="cv-gif">
@@ -314,7 +384,464 @@ entry_point(Command_Line* command_line)
 
       <article id="developing-imgui">
         <h2>Developing an Immediate Mode GUI</h2>
-        <time datetime="2025-10-01">October 1, 2025</time>
+        <time datetime="2025-10-01">October 21, 2025</time>
+        
+        <p>
+          When working on prototypes, I find that having any sort of UI system is an absolute necessity for iteration speed.
+          Once I finally started working on it, I develoepd two rough prototypes. The way I usually go about this is: the first
+          iteration of a project is always a naeve implementation to get something working as fast as possible. Very little research goes into it
+          and my goal is just to make it happen. See what works, what doesn't, what are the hard problems that I'm solving. The second iteration -
+          still in prototype space - is more thoughful, has more research behind it and very obviously tries to improve on the first one.
+        </p>
+        <p>
+          For this UI system, I did the same thing. My main idea was simple. 
+          <ol>
+            <li>Draw a quad on the screen.</li>
+            <li>Trivially check if the cursor was inside.</li>
+            <li>Emit events based on what kind of widget this quad represents.</li>
+          </ol>
+          Find this implementation here:
+          <a href="https://github.com/FranciscoZacarias/turtle/blob/master/src/ui.h">ui.h</a>.
+          <a href="https://github.com/FranciscoZacarias/turtle/blob/master/src/ui.c">ui.c</a>.
+        </p>
+        <p>
+          For this approach, every widget is built fron the ground up. Every widget has very specific contained logic, which has to be
+          re-implemented to every other widget, even if functionality is similar. Take my <code> ui_button </code> and <code> ui_checkbox </code> widget for example:
+        </p>
+        <pre><code>ui_button(text)
+{
+  Acquire next rect for button
+  Check if mouse is over → highlight → change cursor
+  If mouse down → darken
+  If mouse clicked → mark clicked
+  Lerp color toward target
+  Draw button quad
+  Draw text centered
+  Return if clicked
+}</code></pre>
+<pre><code>ui_checkbox(text, checkbox)
+{
+  Acquire next rect for checkbox + label
+  Check if mouse is over → highlight → change cursor
+  If clicked → toggle checkbox
+  Draw small box
+  If checked → draw X mark
+  Draw text beside box
+}</code></pre>
+          
+      <p>That's a lot of logic for one widget - logic that has to be duplicated for all widgets I want to implement from now on.</p>
+      <p>
+        Now, I don't have any inherent problem with duplicating code - but the problem is with scale. The more widgets I add and the more functionality I need to support
+        the bigger the problem becomes. For example, if I want to add keyboard navigation to my UI system, I would have to go and modify every single widget to support it.
+      </p>
+
+      <p>
+        After this point, I felt like I had enough of a rough idea of what the problem was. How the global context for the ui module should look like,
+        how the cross frame persistance would look like, how input handling would be done, how rendering would be handled... And so I decided to go onto my second iteration.
+      </p>
+
+      <strong>Separating builder code from widgets</strong>
+      <p>
+        After some research, I found a very helpful project - <a href="https://github.com/EpicGamesExt/raddebugger/tree/master/src/ui">raddbg</a> - that implements a UI system that solves the main problem I had.
+        The main idea is that there is a separation of concerns when it comes to building widgets and implementing logic. Implementing widgets should be 
+        a task more akin to scripting than programming. You just create nodes, define their properties and attach functionality to them, while the bulk of the implementation
+        is on building the node itself.
+      </p>
+      <p>
+        With this idea in mind, I started working on my second iteration of the UI system. The main idea is that every node is a quad with some optional text,
+        and every node has functionality that can be attached to it. Building widgets becomes almost a scripting task - you just create nodes and attach functionality to them.
+        The hard part is implementing the nodes themselves, but once they are implemented, building complex UIs becomes trivial.
+      </p>
+
+      <strong>The UI Tree</strong>
+      <p>
+        To begin with, we need a global context for the UI module that handles all of underlying logic and state management.
+        The most important thing we'll keep here is the <code>UI_Node* root</code> node. This node is the root of the UI tree and contains all other nodes as children.
+      </p>
+      <p>
+        And now we need a <code>UI_Node</code>. This is the main structure we will use to build the UI system. From now on, I use this structure
+        as the building block for all widgets. Every widget is just a collection of nodes with some attached functionality, so the bulk of the implementation
+        will be in building each node. A node structure would look something like this:
+      </p>
+      <pre><code>typedef struct UI_Node UI_Node;
+struct UI_Node
+{
+  // Node tree
+  UI_Node* first; /* First child */
+  UI_Node* last;  /* Last child */
+  UI_Node* next;  /* Next child, after current node */
+  UI_Node* previous; /* Previous child, before current node */
+  UI_Node* parent;   /* Parent of current node */
+
+  u64 hash;
+
+  // Node Settings
+  Rectf32 bounds;  /* Container rectangle drawing bounds - Absolute values */
+  Rectf32 clip;    /* Clipping rectangle for children - Absolute values */
+  Vec2f32 cursor;  /* Next position to draw - Relative to node->clip */
+
+  ...
+
+  f32 depth; /* Keeps track of that's in front. Smaller number means closer to the camera. 1 is root */
+  UI_Node_Flags flags; /* Behaviour for this node */
+  Vec2f32 local_drag_offset; /* How much it was offseted this frame */
+
+  // Style
+  ...
+
+  // String stuff
+  String8 string;
+  ...
+
+};</code></pre>
+
+      <p>
+        With this structure, we can build a tree of nodes that represent the UI. As an example, take a look at this window (debug boundaries are turned on for clarity):
+      </p>
+      <img src="assets/project_showcase/fz_ui_example.PNG"></img>
+      <p>At the end of the frame, we would have a UI tree that looks somehting like this:</p>
+<pre class="mermaid">
+graph TD
+  root["__root__"]
+  root --> win["Test Window"]
+  win --> title["title_bar"]
+  win --> row["##layout_x"]
+  row --> label["Label"]
+  row --> btn["Button 1"]
+  row --> cbA_row["##Checkbox a"]
+  cbA_row --> cbA["Checkbox a"]
+  cbA_row --> cbA_lbl["Checkbox a"]
+  win --> col["##layout_y"]
+  col --> more["More checkboxes"]
+  col --> cbB_row["##Checkbox b"]
+  cbB_row --> cbB["Checkbox b"]
+  cbB_row --> cbB_lbl["Checkbox b"]
+</pre>
+      <p>
+        Here you can already see the structure that the UI tree will have and how some more complex nodes are structured.
+        For example, note the "Test Window" widget. The titlebar it's own node, essentially a child of the window, though it acts as if it belongs to the same widget.
+        Buttons are just one node since they essentially are a quad with some text. Checkboxes are two nodes - one for the box and one for the label. And that's the rough idea for this tree structure.
+      </p>
+
+      <strong>Building each node</strong>
+      <p>
+        With this structure in mind, we can start building each node. The main idea is that every node is a quad with some optional text,
+        and every node has functionality that can be attached to it. This functionality is attached through flags at createion time.
+        For example:
+      </p>
+      <pre><code>typedef u32 UI_Node_Flags;
+enum
+{
+  UI_Node_Flags_Mouse_Clickable = (1 << 0), /* Makes this node emit a signal when clicked */
+  UI_Node_Flags_Draggable = (1 << 1), /* Makes this node emit a signal when dragged */
+  UI_Node_Flags_Hoverable = (1 << 2), /* Makes this node emit a signal when hovered */
+  UI_Node_Flags_Text_Display = (1 << 3), /* The UI_Node will display the text on the cursor's position and skip the cursor relative to UI_Alignment_Kind */
+  UI_Node_Flags_Text_Center_X = (1 << 4), /* If text is displayed, centers the text horizontally in the node */
+  UI_Node_Flags_Text_Center_Y = (1 << 5), /* If text is displayed, centers the text vertically in the node */
+  UI_Node_Flags_Size_Wrap_Around_Text = (1 << 6), /* Wraps the size of the node around the text with. If fixed size is provided, it is used as padding. */
+  UI_Node_Flags_Resize_X = (1 << 7), /* Node can be resized on X axis */
+  UI_Node_Flags_Resize_Y = (1 << 8), /* Node can be resized on Y axis */
+};</code></pre>
+      <p>
+        These are some of the behaviour flags you would want to add to a node. 
+        Now let's say we're creating a button widget. All we have to do would have to be something like this:
+      </p>
+      <pre><code>
+UI_Node_Flags button_flags =  UI_Node_Flags_Mouse_Clickable |
+                              UI_Node_Flags_Hoverable       |
+                              UI_Node_Flags_Text_Display    |
+                              UI_Node_Flags_Text_Center_Y   |
+                              UI_Node_Flags_Text_Center_X   |
+                              UI_Node_Flags_Size_Wrap_Around_Text;
+ui_node_from_string(text, button_flags);</code></pre>
+      <p>
+        As you can see here, these flags are attached to the node when created. The resulting node will implement this functionality.
+        It becomes almost as if we're configuring a widget, rather than creating one.
+        Then inside <code>ui_node_from_string</code> is where we implement the bulk of the logic.
+      </p>
+      <p>
+        A very simplified way of thinking about what this function is doing can be thought of as this:
+      </p>
+      <pre><code>function UI_Node*
+ui_node_from_string(String8 string, UI_Node_Flags flags)
+{
+  ...
+
+  UI_Node* parent = ui_stack_parent_top(); // Grab the parent node from the stack
+  UI_Node* node = push_array(ui_context.frame_arena, UI_Node, 1); // Allocate this node
+
+  // Build the current node
+  node->hash              = parent->hash ^ string8_hash(string);
+  node->depth             = (node != ui_context.root) ? (parent->depth - F32_EPSILON) : 1.0f;
+  node->string            = string8_copy(ui_context.frame_arena, string);
+  node->...
+  
+  // String config
+  if (HasFlags(node->flags, UI_Node_Flags_Text_Display))
+  {
+    // Prepare for text drawing
+    if (HasFlags(node->flags, UI_Node_Flags_Text_Center_Y))
+    {
+      // We align the string vertically
+    }
+    if (HasFlags(node->flags, UI_Node_Flags_Text_Center_X))
+    {
+      // We align the string horizontally
+    }
+  }
+
+  ...
+
+  // Selecting the correct node  
+  if (ui_is_mouse_in_node(node))
+  {
+    if (node->depth < ui_context.hash_hot_depth)
+    {
+      ui_context.hash_hot       = node->hash;
+      ui_context.hash_hot_depth = node->depth;
+      if (input_is_button_clicked(&g_input, Mouse_Button_Left))
+      {
+        ui_context.hash_active       = node->hash;
+        ui_context.hash_active_depth = node->depth;
+      }
+    }
+  }
+  if (input_is_button_up(&g_input, Mouse_Button_Left) && input_was_button_down(&g_input, Mouse_Button_Left))
+  {
+    ui_context.hash_active = 0;
+    ui_context.hash_active_depth = 1.0f;
+  }
+  
+  // Dragging
+  if (ui_context.hash_active == node->hash)
+  {
+    if (HasFlags(node->flags, UI_Node_Flags_Draggable))
+    {
+      node->local_drag_offset = g_input.mouse_current.delta;
+    }
+  }
+
+  return node;
+}</code></pre>
+      <p>
+        This way, the node builds itself based on the flags provided. In this system, there is no such thing as a button for example, only a node that is clickable, hoverable... etc.
+      </p>
+
+      <strong>Using stacks for configurability</strong>
+      <p>
+        Another important aspect of this system is configurability. Every node has a set of properties that define its behaviour and appearance.
+        We want some of these properties to propagate down the tree, so that child nodes can inherit properties from their parents. This is achieved by
+        having stacks for each property that we want to propagate. For example, we can have a stack for the position of the next node:
+      </p>
+      <pre><code>typedef struct UI_Context UI_Context;
+      struct UI_Context
+      {
+        ...
+
+        struct UI_Parent_stack
+        {
+          UI_Node* data[MAX_CONFIG_STACKS];
+          u32 top_index;
+          UI_Node* bottom_val;
+        } parent_stack;
+      };</code></pre>
+      <p>
+        Naturally, everytime we create a new widget, we want to place it somewhere. This way, we can push the position onto the stack and the context will use the top of the stack as the position for the next widget.
+        One cool way I found in the source code of <em>raddebugger</em> to do this is through a set of macros that define the start and end of a widget. For example: 
+        <pre><code>#define ui_top_left(val) DeferLoop(ui_stack_top_left_push(val), ui_stack_top_left_pop())</code></pre>
+        This essentially creates a scope where the top left position is set to <code>val</code>, and when the scope ends, the previous value is restored. So say you want to create a button in a specific position:
+      </p>
+      <pre><code>ui_top_left(vec2f32(200,200))
+        {
+          ui_button(S("Test Window"));
+        }</code></pre>
+      <p>
+        This way, internally, <em>vec2f32(200,200)</em> is pushed onto the stack, then when <em>ui_node_from_string(...)</em> is called, it builds the node and it's position by peeking at the top of the top_left stack,
+        and assigning that value to the node's position. When the scope of the Defer macro ends, the value is poped from the stack. By the end of the frame, to check for bugs, I like to check if all stacks are at the bottom - meaning all of them were poped correctly. 
+      </p>
+      <p>
+        One worry about this approach is scaling the amount of configurability. Inevitably, this will lead to a huge amount of stacks. While this is obviously achievable, it's mostly boiler plate.
+        To deal with this, I use my code generator - <a href="#hephaestus" data-page="blog" class="nav-link">Hephaestus</a> - to generate all of the stack code for me, putting them in a macro, and I just have to call that macro insitde the UI_Context strucutre. This way I don't have to write it by hand.
+      </p>
+
+      <strong>Immediate mode <u><em>but</em></u> cross frame persistance</strong>
+      <p>
+        One problem that we now face is that, if we want to move a node around, we will always have the same position on the stack.
+        By design, we don't want the user to have to manage node positions. We just require the initial position. 
+        While this is a immediate mode UI system, we still cannot get around the fact we need to store some state between frames.
+      </p>
+      <p>
+        Because we <em>hash</em> every node's string, we can use this hash as a unique identifier for the node. The cache structure only requires the hash and whatever attributes we need to persist between frames, not the full UI_Node.
+        In my case, it looks something like this:
+      </p>
+      <pre><code>typedef struct UI_Node_Cache UI_Node_Cache;
+struct UI_Node_Cache
+{
+  u64 hash;
+  ...
+}</pre></code>
+      <p>
+        This then can be stored in a hash table, where every frame we look for the node's hash in the table. 
+        To solve this positioning problem, we can store an offset position (which is the mouse cursor delta we collected while clicking on a draggable node) in the cache, that way, when we create the node again next frame,
+        we can just add this offset to the initial position to get the new position. This way the stack has a static reference value provided by the user, and the cache provides the dynamic offset value that we collect while interacting with the node.
+      </p>
+      <strong>Cross frame transitions</strong>
+      <p>
+        This is also usefull for transitions for example. I like to have some smooth color transitions when clicking or hovering nodes.
+        We can achieve this in the same way by storing a linear interpolation factor in the cache that we update every frame based on the node's state (hovered, clicked... etc).
+      </p>
+      <pre><code>typedef struct UI_Node_Cache UI_Node_Cache;
+struct UI_Node_Cache
+{
+  u64 hash;
+  Vec2f32 accumulated_drag_offset; /* How much it has been offseted in total */
+  f32 hover_t;
+  f32 active_t;
+};</code></pre>
+      <p>
+        And then we can interpolate between the colors - by a given speed - based on these values:
+      </p>
+      <pre><code>// Hover
+if (HasFlags(node->flags, UI_Node_Flags_Hoverable))
+{
+  if (ui_context.hash_hot == node->hash)
+  {
+    cached_node->hover_t = Clamp(cached_node->hover_t + g_delta_time * ui_context.animation_speed, 0, 1);
+  }
+  else
+  {
+    cached_node->hover_t = Clamp(cached_node->hover_t - g_delta_time * ui_context.animation_speed, 0, 1);
+  }
+}
+
+// Active
+if (HasFlags(node->flags, UI_Node_Flags_Mouse_Clickable))
+{
+  if (ui_context.hash_active == node->hash)
+  {
+    cached_node->active_t = Clamp(cached_node->active_t + g_delta_time * ui_context.animation_speed, 0, 1);
+  }
+  else
+  {
+    cached_node->active_t = Clamp(cached_node->active_t - g_delta_time * ui_context.animation_speed, 0, 1);
+  }
+}</code></pre>
+      <p>
+        The result would look something like this:
+      </p>
+      <img src="assets/project_showcase/fz_ui_transitions.gif"></img>
+      <p>
+
+      </p>
+
+      <strong>Building each widget</strong>
+      <p>
+        With this setup, building each widget becomes a matter of creating nodes with the correct flags and properties.
+        Take the full button implementation for example:
+      </p>
+      <pre><code>function UI_Signal
+ui_button(String8 text)
+{
+  UI_Signal button_signal = (UI_Signal){0};
+  {
+    ui_node_color_scheme(ui_context.color_scheme.button)
+    ui_child_layout_kind(UI_Alignment_Kind_X)
+    ui_padding_fixed(0)
+    ui_size_fixed(20, ui_context.text_pixel_height - ui_context.default_widget_height)
+    {
+      UI_Node_Flags button_flags = UI_Node_Flags_Mouse_Clickable |
+                                   UI_Node_Flags_Hoverable       |
+                                   UI_Node_Flags_Text_Display    |
+                                   UI_Node_Flags_Text_Center_Y   |
+                                   UI_Node_Flags_Text_Center_X   |
+                                   UI_Node_Flags_Size_Wrap_Around_Text;
+      button_signal.node  = ui_node_from_string(text, button_flags);
+      ui_fill_signals_from_node(&button_signal);
+    }
+  }
+  return button_signal;
+}</code></pre>
+      <p>
+        Creating a button is a matter of setting up some configuration (color scheme, layout kind, padding, size) and then assigning the expected behaviour flags.
+        You can have more complex widgets, such as a window for example, which would be a collection of nodes with specific behaviour.
+        In order for the child nodes to inherit properties from the window node, the window cannot just be one function call. We have to define a begin and end function:
+      </p>
+      <pre><code>function void
+ui_window_begin(String8 text)
+{
+  UI_Signal window_signal = (UI_Signal){0};
+  {
+    ui_node_color_scheme(ui_context.color_scheme.window)
+    ui_child_layout_kind(UI_Alignment_Kind_Y)
+    {
+      UI_Node_Flags window_flags = 0;
+      String8 window_text = Sf(ui_context.frame_arena, ""S_FMT"##_window_", S_ARG(text));
+      window_signal.node = ui_node_from_string(window_text, window_flags);
+      ui_stack_parent_push(window_signal.node);
+    }
+  }
+
+  UI_Signal title_bar_signal = (UI_Signal){0};
+  {
+    ui_node_color_scheme(ui_context.color_scheme.title_bar)
+    ui_child_layout_kind(UI_Alignment_Kind_X)
+    ui_padding_fixed(2)
+    ui_size_kind_x(UI_Size_Kind_Relative) ui_size_relative_x(1)
+    ui_size_kind_y(UI_Size_Kind_Relative) ui_size_relative_y(0.08)
+    {
+      UI_Node_Flags title_bar_flags = UI_Node_Flags_Mouse_Clickable |
+                                      UI_Node_Flags_Hoverable       |
+                                      UI_Node_Flags_Draggable       |
+                                      UI_Node_Flags_Text_Display    |
+                                      UI_Node_Flags_Text_Center_Y;
+      String8 window_title_bar_text = Sf(ui_context.frame_arena, ""S_FMT"##_title_bar_", S_ARG(text));
+      title_bar_signal.node = ui_node_from_string(window_title_bar_text, title_bar_flags);
+    }
+  }
+}
+
+function void
+ui_window_end()
+{
+  UI_Node* node = ui_stack_parent_pop();
+  Vec2f32 offset = {0};
+  if (ui_find_first_drag_offset(node, &offset))
+  {
+    ui_apply_drag_offset(node, offset);
+  }
+  ui_update_tree_nodes(node);
+}</code></pre>
+
+      <p>
+        This makes us push the <em>window context</em> to the stack as a parent of all nodes created in between the start and end.
+        As we've seen before, this is another great opportunity to make use of the Defer macro, where we all the nodes called inside the Defer macro scope, will be children of the window:
+      </p>
+      <pre><code>ui_begin();
+ui_top_left(vec2f32(200,200))
+ui_size_fixed_x(200) ui_size_fixed_y(200)
+ui_window(S("Test Window"))
+{
+  ui_padding_fixed(5)
+  ui_row(S("Test Row"), 100)
+  {
+    ui_label(S("Label"));
+    ui_button(S("Button 1"));
+    ui_checkbox(S("Checkbox a"), &a);
+  }
+  ui_padding_fixed(5)
+  ui_column(S("Test column"), 200)
+  {
+    ui_label(S("More checkboxes"));
+    ui_checkbox(S("Checkbox b"), &b);
+  }
+}
+ui_end();</code></pre>
+
+      <p>
+        My implementation of this system can be found at: <a href="https://github.com/FranciscoZacarias/fz_ui">fz_ui</a>.
+        Being a prototype, this is a rough implementation. There are many missing features and some bugs. But overall, I'm happy with the results and I will continue to iterate on similar systems in other projects.
+      </p>
+
       </article>
 
       <hr><hr>
